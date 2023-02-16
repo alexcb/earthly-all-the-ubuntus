@@ -1,0 +1,7 @@
+This earthfile will start many different versions of ubuntu,
+in parallel when running
+
+    earthly +lots
+
+or sequentially when running
+    earthly +lots-wait
