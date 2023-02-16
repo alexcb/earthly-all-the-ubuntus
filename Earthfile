@@ -46,3 +46,11 @@ lots-wait:
     END
   END
   RUN echo ok
+
+generate-long-chain-earthfile:
+  FROM python:3
+  COPY tags .
+  COPY generate-long.py .
+  ARG n
+  RUN python3 generate-long.py > Earthfile
+  SAVE ARTIFACT Earthfile AS LOCAL long-chain/Earthfile

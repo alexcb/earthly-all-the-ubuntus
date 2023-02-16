@@ -1,0 +1,3254 @@
+VERSION 0.7
+before:
+  FROM alpine:latest
+  RUN echo before > /data
+  SAVE ARTIFACT /data
+stress:
+  FROM progrium/stress
+  ARG i
+  RUN echo i=$i && stress --cpu 1 --io 1 --vm 1 --vm-bytes 8M --timeout 10s
+target0:
+  FROM ubuntu:10.04
+  BUILD +stress --i=10.04
+  COPY +before/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target1:
+  FROM ubuntu:12.04
+  BUILD +stress --i=12.04
+  COPY +target0/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target2:
+  FROM ubuntu:12.04.5
+  BUILD +stress --i=12.04.5
+  COPY +target1/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target3:
+  FROM ubuntu:12.10
+  BUILD +stress --i=12.10
+  COPY +target2/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target4:
+  FROM ubuntu:13.04
+  BUILD +stress --i=13.04
+  COPY +target3/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target5:
+  FROM ubuntu:13.10
+  BUILD +stress --i=13.10
+  COPY +target4/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target6:
+  FROM ubuntu:14.04
+  BUILD +stress --i=14.04
+  COPY +target5/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target7:
+  FROM ubuntu:14.04.1
+  BUILD +stress --i=14.04.1
+  COPY +target6/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target8:
+  FROM ubuntu:14.04.2
+  BUILD +stress --i=14.04.2
+  COPY +target7/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target9:
+  FROM ubuntu:14.04.3
+  BUILD +stress --i=14.04.3
+  COPY +target8/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target10:
+  FROM ubuntu:14.04.5
+  BUILD +stress --i=14.04.5
+  COPY +target9/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target11:
+  FROM ubuntu:14.10
+  BUILD +stress --i=14.10
+  COPY +target10/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target12:
+  FROM ubuntu:15.04
+  BUILD +stress --i=15.04
+  COPY +target11/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target13:
+  FROM ubuntu:16.04
+  BUILD +stress --i=16.04
+  COPY +target12/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target14:
+  FROM ubuntu:16.10
+  BUILD +stress --i=16.10
+  COPY +target13/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target15:
+  FROM ubuntu:17.04
+  BUILD +stress --i=17.04
+  COPY +target14/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target16:
+  FROM ubuntu:17.10
+  BUILD +stress --i=17.10
+  COPY +target15/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target17:
+  FROM ubuntu:18.04
+  BUILD +stress --i=18.04
+  COPY +target16/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target18:
+  FROM ubuntu:18.10
+  BUILD +stress --i=18.10
+  COPY +target17/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target19:
+  FROM ubuntu:19.04
+  BUILD +stress --i=19.04
+  COPY +target18/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target20:
+  FROM ubuntu:19.10
+  BUILD +stress --i=19.10
+  COPY +target19/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target21:
+  FROM ubuntu:20.04
+  BUILD +stress --i=20.04
+  COPY +target20/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target22:
+  FROM ubuntu:20.10
+  BUILD +stress --i=20.10
+  COPY +target21/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target23:
+  FROM ubuntu:21.04
+  BUILD +stress --i=21.04
+  COPY +target22/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target24:
+  FROM ubuntu:21.10
+  BUILD +stress --i=21.10
+  COPY +target23/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target25:
+  FROM ubuntu:22.04
+  BUILD +stress --i=22.04
+  COPY +target24/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target26:
+  FROM ubuntu:22.10
+  BUILD +stress --i=22.10
+  COPY +target25/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target27:
+  FROM ubuntu:23.04
+  BUILD +stress --i=23.04
+  COPY +target26/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target28:
+  FROM ubuntu:artful
+  BUILD +stress --i=artful
+  COPY +target27/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target29:
+  FROM ubuntu:artful-20170511.1
+  BUILD +stress --i=artful-20170511.1
+  COPY +target28/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target30:
+  FROM ubuntu:artful-20170601
+  BUILD +stress --i=artful-20170601
+  COPY +target29/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target31:
+  FROM ubuntu:artful-20170619
+  BUILD +stress --i=artful-20170619
+  COPY +target30/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target32:
+  FROM ubuntu:artful-20170716
+  BUILD +stress --i=artful-20170716
+  COPY +target31/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target33:
+  FROM ubuntu:artful-20170728
+  BUILD +stress --i=artful-20170728
+  COPY +target32/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target34:
+  FROM ubuntu:artful-20170826
+  BUILD +stress --i=artful-20170826
+  COPY +target33/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target35:
+  FROM ubuntu:artful-20170916
+  BUILD +stress --i=artful-20170916
+  COPY +target34/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target36:
+  FROM ubuntu:artful-20171006
+  BUILD +stress --i=artful-20171006
+  COPY +target35/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target37:
+  FROM ubuntu:artful-20171019
+  BUILD +stress --i=artful-20171019
+  COPY +target36/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target38:
+  FROM ubuntu:artful-20171116
+  BUILD +stress --i=artful-20171116
+  COPY +target37/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target39:
+  FROM ubuntu:artful-20180112
+  BUILD +stress --i=artful-20180112
+  COPY +target38/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target40:
+  FROM ubuntu:artful-20180123
+  BUILD +stress --i=artful-20180123
+  COPY +target39/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target41:
+  FROM ubuntu:artful-20180227
+  BUILD +stress --i=artful-20180227
+  COPY +target40/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target42:
+  FROM ubuntu:artful-20180412
+  BUILD +stress --i=artful-20180412
+  COPY +target41/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target43:
+  FROM ubuntu:artful-20180417
+  BUILD +stress --i=artful-20180417
+  COPY +target42/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target44:
+  FROM ubuntu:artful-20180524
+  BUILD +stress --i=artful-20180524
+  COPY +target43/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target45:
+  FROM ubuntu:artful-20180706
+  BUILD +stress --i=artful-20180706
+  COPY +target44/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target46:
+  FROM ubuntu:bionic
+  BUILD +stress --i=bionic
+  COPY +target45/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target47:
+  FROM ubuntu:bionic-20171114
+  BUILD +stress --i=bionic-20171114
+  COPY +target46/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target48:
+  FROM ubuntu:bionic-20171214
+  BUILD +stress --i=bionic-20171214
+  COPY +target47/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target49:
+  FROM ubuntu:bionic-20171220
+  BUILD +stress --i=bionic-20171220
+  COPY +target48/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target50:
+  FROM ubuntu:bionic-20180125
+  BUILD +stress --i=bionic-20180125
+  COPY +target49/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target51:
+  FROM ubuntu:bionic-20180224
+  BUILD +stress --i=bionic-20180224
+  COPY +target50/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target52:
+  FROM ubuntu:bionic-20180410
+  BUILD +stress --i=bionic-20180410
+  COPY +target51/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target53:
+  FROM ubuntu:bionic-20180426
+  BUILD +stress --i=bionic-20180426
+  COPY +target52/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target54:
+  FROM ubuntu:bionic-20180526
+  BUILD +stress --i=bionic-20180526
+  COPY +target53/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target55:
+  FROM ubuntu:bionic-20180710
+  BUILD +stress --i=bionic-20180710
+  COPY +target54/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target56:
+  FROM ubuntu:bionic-20180724.1
+  BUILD +stress --i=bionic-20180724.1
+  COPY +target55/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target57:
+  FROM ubuntu:bionic-20180821
+  BUILD +stress --i=bionic-20180821
+  COPY +target56/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target58:
+  FROM ubuntu:bionic-20181018
+  BUILD +stress --i=bionic-20181018
+  COPY +target57/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target59:
+  FROM ubuntu:bionic-20181112
+  BUILD +stress --i=bionic-20181112
+  COPY +target58/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target60:
+  FROM ubuntu:bionic-20181204
+  BUILD +stress --i=bionic-20181204
+  COPY +target59/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target61:
+  FROM ubuntu:bionic-20190122
+  BUILD +stress --i=bionic-20190122
+  COPY +target60/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target62:
+  FROM ubuntu:bionic-20190204
+  BUILD +stress --i=bionic-20190204
+  COPY +target61/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target63:
+  FROM ubuntu:bionic-20190307
+  BUILD +stress --i=bionic-20190307
+  COPY +target62/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target64:
+  FROM ubuntu:bionic-20190424
+  BUILD +stress --i=bionic-20190424
+  COPY +target63/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target65:
+  FROM ubuntu:bionic-20190515
+  BUILD +stress --i=bionic-20190515
+  COPY +target64/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target66:
+  FROM ubuntu:bionic-20190612
+  BUILD +stress --i=bionic-20190612
+  COPY +target65/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target67:
+  FROM ubuntu:bionic-20190718
+  BUILD +stress --i=bionic-20190718
+  COPY +target66/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target68:
+  FROM ubuntu:bionic-20190807
+  BUILD +stress --i=bionic-20190807
+  COPY +target67/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target69:
+  FROM ubuntu:bionic-20190912.1
+  BUILD +stress --i=bionic-20190912.1
+  COPY +target68/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target70:
+  FROM ubuntu:bionic-20191010
+  BUILD +stress --i=bionic-20191010
+  COPY +target69/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target71:
+  FROM ubuntu:bionic-20191029
+  BUILD +stress --i=bionic-20191029
+  COPY +target70/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target72:
+  FROM ubuntu:bionic-20191202
+  BUILD +stress --i=bionic-20191202
+  COPY +target71/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target73:
+  FROM ubuntu:bionic-20200112
+  BUILD +stress --i=bionic-20200112
+  COPY +target72/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target74:
+  FROM ubuntu:bionic-20200219
+  BUILD +stress --i=bionic-20200219
+  COPY +target73/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target75:
+  FROM ubuntu:bionic-20200311
+  BUILD +stress --i=bionic-20200311
+  COPY +target74/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target76:
+  FROM ubuntu:bionic-20200403
+  BUILD +stress --i=bionic-20200403
+  COPY +target75/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target77:
+  FROM ubuntu:bionic-20200526
+  BUILD +stress --i=bionic-20200526
+  COPY +target76/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target78:
+  FROM ubuntu:bionic-20200630
+  BUILD +stress --i=bionic-20200630
+  COPY +target77/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target79:
+  FROM ubuntu:bionic-20200713
+  BUILD +stress --i=bionic-20200713
+  COPY +target78/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target80:
+  FROM ubuntu:bionic-20200807
+  BUILD +stress --i=bionic-20200807
+  COPY +target79/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target81:
+  FROM ubuntu:bionic-20200903
+  BUILD +stress --i=bionic-20200903
+  COPY +target80/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target82:
+  FROM ubuntu:bionic-20200921
+  BUILD +stress --i=bionic-20200921
+  COPY +target81/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target83:
+  FROM ubuntu:bionic-20201119
+  BUILD +stress --i=bionic-20201119
+  COPY +target82/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target84:
+  FROM ubuntu:bionic-20210118
+  BUILD +stress --i=bionic-20210118
+  COPY +target83/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target85:
+  FROM ubuntu:bionic-20210222
+  BUILD +stress --i=bionic-20210222
+  COPY +target84/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target86:
+  FROM ubuntu:bionic-20210325
+  BUILD +stress --i=bionic-20210325
+  COPY +target85/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target87:
+  FROM ubuntu:bionic-20210416
+  BUILD +stress --i=bionic-20210416
+  COPY +target86/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target88:
+  FROM ubuntu:bionic-20210512
+  BUILD +stress --i=bionic-20210512
+  COPY +target87/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target89:
+  FROM ubuntu:bionic-20210615.1
+  BUILD +stress --i=bionic-20210615.1
+  COPY +target88/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target90:
+  FROM ubuntu:bionic-20210702
+  BUILD +stress --i=bionic-20210702
+  COPY +target89/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target91:
+  FROM ubuntu:bionic-20210723
+  BUILD +stress --i=bionic-20210723
+  COPY +target90/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target92:
+  FROM ubuntu:bionic-20210827
+  BUILD +stress --i=bionic-20210827
+  COPY +target91/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target93:
+  FROM ubuntu:bionic-20210930
+  BUILD +stress --i=bionic-20210930
+  COPY +target92/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target94:
+  FROM ubuntu:bionic-20220105
+  BUILD +stress --i=bionic-20220105
+  COPY +target93/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target95:
+  FROM ubuntu:bionic-20220128
+  BUILD +stress --i=bionic-20220128
+  COPY +target94/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target96:
+  FROM ubuntu:bionic-20220301
+  BUILD +stress --i=bionic-20220301
+  COPY +target95/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target97:
+  FROM ubuntu:bionic-20220315
+  BUILD +stress --i=bionic-20220315
+  COPY +target96/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target98:
+  FROM ubuntu:bionic-20220401
+  BUILD +stress --i=bionic-20220401
+  COPY +target97/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target99:
+  FROM ubuntu:bionic-20220415
+  BUILD +stress --i=bionic-20220415
+  COPY +target98/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target100:
+  FROM ubuntu:bionic-20220427
+  BUILD +stress --i=bionic-20220427
+  COPY +target99/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target101:
+  FROM ubuntu:bionic-20220531
+  BUILD +stress --i=bionic-20220531
+  COPY +target100/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target102:
+  FROM ubuntu:bionic-20220801
+  BUILD +stress --i=bionic-20220801
+  COPY +target101/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target103:
+  FROM ubuntu:bionic-20220829
+  BUILD +stress --i=bionic-20220829
+  COPY +target102/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target104:
+  FROM ubuntu:bionic-20220902
+  BUILD +stress --i=bionic-20220902
+  COPY +target103/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target105:
+  FROM ubuntu:bionic-20220913
+  BUILD +stress --i=bionic-20220913
+  COPY +target104/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target106:
+  FROM ubuntu:bionic-20221019
+  BUILD +stress --i=bionic-20221019
+  COPY +target105/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target107:
+  FROM ubuntu:bionic-20221130
+  BUILD +stress --i=bionic-20221130
+  COPY +target106/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target108:
+  FROM ubuntu:bionic-20221215
+  BUILD +stress --i=bionic-20221215
+  COPY +target107/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target109:
+  FROM ubuntu:bionic-20230126
+  BUILD +stress --i=bionic-20230126
+  COPY +target108/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target110:
+  FROM ubuntu:cosmic
+  BUILD +stress --i=cosmic
+  COPY +target109/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target111:
+  FROM ubuntu:cosmic-20180605
+  BUILD +stress --i=cosmic-20180605
+  COPY +target110/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target112:
+  FROM ubuntu:cosmic-20180716
+  BUILD +stress --i=cosmic-20180716
+  COPY +target111/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target113:
+  FROM ubuntu:cosmic-20180725
+  BUILD +stress --i=cosmic-20180725
+  COPY +target112/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target114:
+  FROM ubuntu:cosmic-20180821
+  BUILD +stress --i=cosmic-20180821
+  COPY +target113/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target115:
+  FROM ubuntu:cosmic-20180905
+  BUILD +stress --i=cosmic-20180905
+  COPY +target114/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target116:
+  FROM ubuntu:cosmic-20181018
+  BUILD +stress --i=cosmic-20181018
+  COPY +target115/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target117:
+  FROM ubuntu:cosmic-20181114
+  BUILD +stress --i=cosmic-20181114
+  COPY +target116/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target118:
+  FROM ubuntu:cosmic-20181219
+  BUILD +stress --i=cosmic-20181219
+  COPY +target117/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target119:
+  FROM ubuntu:cosmic-20190122
+  BUILD +stress --i=cosmic-20190122
+  COPY +target118/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target120:
+  FROM ubuntu:cosmic-20190131
+  BUILD +stress --i=cosmic-20190131
+  COPY +target119/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target121:
+  FROM ubuntu:cosmic-20190311
+  BUILD +stress --i=cosmic-20190311
+  COPY +target120/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target122:
+  FROM ubuntu:cosmic-20190418
+  BUILD +stress --i=cosmic-20190418
+  COPY +target121/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target123:
+  FROM ubuntu:cosmic-20190515
+  BUILD +stress --i=cosmic-20190515
+  COPY +target122/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target124:
+  FROM ubuntu:cosmic-20190614
+  BUILD +stress --i=cosmic-20190614
+  COPY +target123/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target125:
+  FROM ubuntu:cosmic-20190719
+  BUILD +stress --i=cosmic-20190719
+  COPY +target124/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target126:
+  FROM ubuntu:devel
+  BUILD +stress --i=devel
+  COPY +target125/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target127:
+  FROM ubuntu:disco
+  BUILD +stress --i=disco
+  COPY +target126/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target128:
+  FROM ubuntu:disco-20181112
+  BUILD +stress --i=disco-20181112
+  COPY +target127/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target129:
+  FROM ubuntu:disco-20181220
+  BUILD +stress --i=disco-20181220
+  COPY +target128/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target130:
+  FROM ubuntu:disco-20190118
+  BUILD +stress --i=disco-20190118
+  COPY +target129/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target131:
+  FROM ubuntu:disco-20190204
+  BUILD +stress --i=disco-20190204
+  COPY +target130/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target132:
+  FROM ubuntu:disco-20190310
+  BUILD +stress --i=disco-20190310
+  COPY +target131/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target133:
+  FROM ubuntu:disco-20190423
+  BUILD +stress --i=disco-20190423
+  COPY +target132/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target134:
+  FROM ubuntu:disco-20190515
+  BUILD +stress --i=disco-20190515
+  COPY +target133/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target135:
+  FROM ubuntu:disco-20190613
+  BUILD +stress --i=disco-20190613
+  COPY +target134/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target136:
+  FROM ubuntu:disco-20190718
+  BUILD +stress --i=disco-20190718
+  COPY +target135/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target137:
+  FROM ubuntu:disco-20190809
+  BUILD +stress --i=disco-20190809
+  COPY +target136/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target138:
+  FROM ubuntu:disco-20190913
+  BUILD +stress --i=disco-20190913
+  COPY +target137/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target139:
+  FROM ubuntu:disco-20191011
+  BUILD +stress --i=disco-20191011
+  COPY +target138/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target140:
+  FROM ubuntu:disco-20191030
+  BUILD +stress --i=disco-20191030
+  COPY +target139/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target141:
+  FROM ubuntu:disco-20191127
+  BUILD +stress --i=disco-20191127
+  COPY +target140/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target142:
+  FROM ubuntu:disco-20200114
+  BUILD +stress --i=disco-20200114
+  COPY +target141/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target143:
+  FROM ubuntu:eoan
+  BUILD +stress --i=eoan
+  COPY +target142/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target144:
+  FROM ubuntu:eoan-20190508
+  BUILD +stress --i=eoan-20190508
+  COPY +target143/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target145:
+  FROM ubuntu:eoan-20190614
+  BUILD +stress --i=eoan-20190614
+  COPY +target144/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target146:
+  FROM ubuntu:eoan-20190717.1
+  BUILD +stress --i=eoan-20190717.1
+  COPY +target145/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target147:
+  FROM ubuntu:eoan-20190813
+  BUILD +stress --i=eoan-20190813
+  COPY +target146/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target148:
+  FROM ubuntu:eoan-20190916
+  BUILD +stress --i=eoan-20190916
+  COPY +target147/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target149:
+  FROM ubuntu:eoan-20191017
+  BUILD +stress --i=eoan-20191017
+  COPY +target148/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target150:
+  FROM ubuntu:eoan-20191101
+  BUILD +stress --i=eoan-20191101
+  COPY +target149/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target151:
+  FROM ubuntu:eoan-20191127
+  BUILD +stress --i=eoan-20191127
+  COPY +target150/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target152:
+  FROM ubuntu:eoan-20200114
+  BUILD +stress --i=eoan-20200114
+  COPY +target151/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target153:
+  FROM ubuntu:eoan-20200207
+  BUILD +stress --i=eoan-20200207
+  COPY +target152/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target154:
+  FROM ubuntu:eoan-20200313
+  BUILD +stress --i=eoan-20200313
+  COPY +target153/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target155:
+  FROM ubuntu:eoan-20200410
+  BUILD +stress --i=eoan-20200410
+  COPY +target154/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target156:
+  FROM ubuntu:eoan-20200608
+  BUILD +stress --i=eoan-20200608
+  COPY +target155/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target157:
+  FROM ubuntu:focal
+  BUILD +stress --i=focal
+  COPY +target156/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target158:
+  FROM ubuntu:focal-20191030
+  BUILD +stress --i=focal-20191030
+  COPY +target157/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target159:
+  FROM ubuntu:focal-20191129
+  BUILD +stress --i=focal-20191129
+  COPY +target158/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target160:
+  FROM ubuntu:focal-20200115
+  BUILD +stress --i=focal-20200115
+  COPY +target159/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target161:
+  FROM ubuntu:focal-20200319
+  BUILD +stress --i=focal-20200319
+  COPY +target160/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target162:
+  FROM ubuntu:focal-20200423
+  BUILD +stress --i=focal-20200423
+  COPY +target161/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target163:
+  FROM ubuntu:focal-20200606
+  BUILD +stress --i=focal-20200606
+  COPY +target162/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target164:
+  FROM ubuntu:focal-20200703
+  BUILD +stress --i=focal-20200703
+  COPY +target163/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target165:
+  FROM ubuntu:focal-20200720
+  BUILD +stress --i=focal-20200720
+  COPY +target164/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target166:
+  FROM ubuntu:focal-20200729
+  BUILD +stress --i=focal-20200729
+  COPY +target165/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target167:
+  FROM ubuntu:focal-20200916
+  BUILD +stress --i=focal-20200916
+  COPY +target166/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target168:
+  FROM ubuntu:focal-20200925
+  BUILD +stress --i=focal-20200925
+  COPY +target167/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target169:
+  FROM ubuntu:focal-20201008
+  BUILD +stress --i=focal-20201008
+  COPY +target168/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target170:
+  FROM ubuntu:focal-20201106
+  BUILD +stress --i=focal-20201106
+  COPY +target169/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target171:
+  FROM ubuntu:focal-20210119
+  BUILD +stress --i=focal-20210119
+  COPY +target170/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target172:
+  FROM ubuntu:focal-20210217
+  BUILD +stress --i=focal-20210217
+  COPY +target171/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target173:
+  FROM ubuntu:focal-20210325
+  BUILD +stress --i=focal-20210325
+  COPY +target172/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target174:
+  FROM ubuntu:focal-20210401
+  BUILD +stress --i=focal-20210401
+  COPY +target173/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target175:
+  FROM ubuntu:focal-20210416
+  BUILD +stress --i=focal-20210416
+  COPY +target174/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target176:
+  FROM ubuntu:focal-20210609
+  BUILD +stress --i=focal-20210609
+  COPY +target175/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target177:
+  FROM ubuntu:focal-20210713
+  BUILD +stress --i=focal-20210713
+  COPY +target176/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target178:
+  FROM ubuntu:focal-20210723
+  BUILD +stress --i=focal-20210723
+  COPY +target177/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target179:
+  FROM ubuntu:focal-20210827
+  BUILD +stress --i=focal-20210827
+  COPY +target178/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target180:
+  FROM ubuntu:focal-20210921
+  BUILD +stress --i=focal-20210921
+  COPY +target179/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target181:
+  FROM ubuntu:focal-20211006
+  BUILD +stress --i=focal-20211006
+  COPY +target180/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target182:
+  FROM ubuntu:focal-20220105
+  BUILD +stress --i=focal-20220105
+  COPY +target181/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target183:
+  FROM ubuntu:focal-20220113
+  BUILD +stress --i=focal-20220113
+  COPY +target182/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target184:
+  FROM ubuntu:focal-20220302
+  BUILD +stress --i=focal-20220302
+  COPY +target183/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target185:
+  FROM ubuntu:focal-20220316
+  BUILD +stress --i=focal-20220316
+  COPY +target184/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target186:
+  FROM ubuntu:focal-20220404
+  BUILD +stress --i=focal-20220404
+  COPY +target185/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target187:
+  FROM ubuntu:focal-20220415
+  BUILD +stress --i=focal-20220415
+  COPY +target186/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target188:
+  FROM ubuntu:focal-20220426
+  BUILD +stress --i=focal-20220426
+  COPY +target187/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target189:
+  FROM ubuntu:focal-20220531
+  BUILD +stress --i=focal-20220531
+  COPY +target188/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target190:
+  FROM ubuntu:focal-20220801
+  BUILD +stress --i=focal-20220801
+  COPY +target189/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target191:
+  FROM ubuntu:focal-20220826
+  BUILD +stress --i=focal-20220826
+  COPY +target190/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target192:
+  FROM ubuntu:focal-20220922
+  BUILD +stress --i=focal-20220922
+  COPY +target191/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target193:
+  FROM ubuntu:focal-20221019
+  BUILD +stress --i=focal-20221019
+  COPY +target192/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target194:
+  FROM ubuntu:focal-20221130
+  BUILD +stress --i=focal-20221130
+  COPY +target193/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target195:
+  FROM ubuntu:focal-20230126
+  BUILD +stress --i=focal-20230126
+  COPY +target194/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target196:
+  FROM ubuntu:groovy
+  BUILD +stress --i=groovy
+  COPY +target195/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target197:
+  FROM ubuntu:groovy-20200505
+  BUILD +stress --i=groovy-20200505
+  COPY +target196/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target198:
+  FROM ubuntu:groovy-20200609
+  BUILD +stress --i=groovy-20200609
+  COPY +target197/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target199:
+  FROM ubuntu:groovy-20200704
+  BUILD +stress --i=groovy-20200704
+  COPY +target198/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target200:
+  FROM ubuntu:groovy-20200723
+  BUILD +stress --i=groovy-20200723
+  COPY +target199/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target201:
+  FROM ubuntu:groovy-20200812
+  BUILD +stress --i=groovy-20200812
+  COPY +target200/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target202:
+  FROM ubuntu:groovy-20200911
+  BUILD +stress --i=groovy-20200911
+  COPY +target201/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target203:
+  FROM ubuntu:groovy-20200921
+  BUILD +stress --i=groovy-20200921
+  COPY +target202/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target204:
+  FROM ubuntu:groovy-20201022.1
+  BUILD +stress --i=groovy-20201022.1
+  COPY +target203/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target205:
+  FROM ubuntu:groovy-20201125.2
+  BUILD +stress --i=groovy-20201125.2
+  COPY +target204/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target206:
+  FROM ubuntu:groovy-20210115
+  BUILD +stress --i=groovy-20210115
+  COPY +target205/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target207:
+  FROM ubuntu:groovy-20210225
+  BUILD +stress --i=groovy-20210225
+  COPY +target206/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target208:
+  FROM ubuntu:groovy-20210325
+  BUILD +stress --i=groovy-20210325
+  COPY +target207/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target209:
+  FROM ubuntu:groovy-20210325.1
+  BUILD +stress --i=groovy-20210325.1
+  COPY +target208/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target210:
+  FROM ubuntu:groovy-20210416
+  BUILD +stress --i=groovy-20210416
+  COPY +target209/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target211:
+  FROM ubuntu:groovy-20210514
+  BUILD +stress --i=groovy-20210514
+  COPY +target210/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target212:
+  FROM ubuntu:groovy-20210524
+  BUILD +stress --i=groovy-20210524
+  COPY +target211/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target213:
+  FROM ubuntu:groovy-20210614
+  BUILD +stress --i=groovy-20210614
+  COPY +target212/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target214:
+  FROM ubuntu:groovy-20210713
+  BUILD +stress --i=groovy-20210713
+  COPY +target213/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target215:
+  FROM ubuntu:groovy-20210723
+  BUILD +stress --i=groovy-20210723
+  COPY +target214/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target216:
+  FROM ubuntu:hirsute
+  BUILD +stress --i=hirsute
+  COPY +target215/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target217:
+  FROM ubuntu:hirsute-20201119
+  BUILD +stress --i=hirsute-20201119
+  COPY +target216/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target218:
+  FROM ubuntu:hirsute-20210119
+  BUILD +stress --i=hirsute-20210119
+  COPY +target217/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target219:
+  FROM ubuntu:hirsute-20210401
+  BUILD +stress --i=hirsute-20210401
+  COPY +target218/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target220:
+  FROM ubuntu:hirsute-20210422
+  BUILD +stress --i=hirsute-20210422
+  COPY +target219/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target221:
+  FROM ubuntu:hirsute-20210514
+  BUILD +stress --i=hirsute-20210514
+  COPY +target220/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target222:
+  FROM ubuntu:hirsute-20210522
+  BUILD +stress --i=hirsute-20210522
+  COPY +target221/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target223:
+  FROM ubuntu:hirsute-20210602
+  BUILD +stress --i=hirsute-20210602
+  COPY +target222/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target224:
+  FROM ubuntu:hirsute-20210711
+  BUILD +stress --i=hirsute-20210711
+  COPY +target223/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target225:
+  FROM ubuntu:hirsute-20210723
+  BUILD +stress --i=hirsute-20210723
+  COPY +target224/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target226:
+  FROM ubuntu:hirsute-20210825
+  BUILD +stress --i=hirsute-20210825
+  COPY +target225/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target227:
+  FROM ubuntu:hirsute-20210917
+  BUILD +stress --i=hirsute-20210917
+  COPY +target226/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target228:
+  FROM ubuntu:hirsute-20211107
+  BUILD +stress --i=hirsute-20211107
+  COPY +target227/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target229:
+  FROM ubuntu:hirsute-20211208
+  BUILD +stress --i=hirsute-20211208
+  COPY +target228/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target230:
+  FROM ubuntu:hirsute-20220113
+  BUILD +stress --i=hirsute-20220113
+  COPY +target229/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target231:
+  FROM ubuntu:impish
+  BUILD +stress --i=impish
+  COPY +target230/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target232:
+  FROM ubuntu:impish-20210519
+  BUILD +stress --i=impish-20210519
+  COPY +target231/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target233:
+  FROM ubuntu:impish-20210606
+  BUILD +stress --i=impish-20210606
+  COPY +target232/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target234:
+  FROM ubuntu:impish-20210711
+  BUILD +stress --i=impish-20210711
+  COPY +target233/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target235:
+  FROM ubuntu:impish-20210722
+  BUILD +stress --i=impish-20210722
+  COPY +target234/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target236:
+  FROM ubuntu:impish-20210827
+  BUILD +stress --i=impish-20210827
+  COPY +target235/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target237:
+  FROM ubuntu:impish-20210928
+  BUILD +stress --i=impish-20210928
+  COPY +target236/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target238:
+  FROM ubuntu:impish-20211015
+  BUILD +stress --i=impish-20211015
+  COPY +target237/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target239:
+  FROM ubuntu:impish-20211102
+  BUILD +stress --i=impish-20211102
+  COPY +target238/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target240:
+  FROM ubuntu:impish-20220105
+  BUILD +stress --i=impish-20220105
+  COPY +target239/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target241:
+  FROM ubuntu:impish-20220128
+  BUILD +stress --i=impish-20220128
+  COPY +target240/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target242:
+  FROM ubuntu:impish-20220301
+  BUILD +stress --i=impish-20220301
+  COPY +target241/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target243:
+  FROM ubuntu:impish-20220316
+  BUILD +stress --i=impish-20220316
+  COPY +target242/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target244:
+  FROM ubuntu:impish-20220404
+  BUILD +stress --i=impish-20220404
+  COPY +target243/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target245:
+  FROM ubuntu:impish-20220415
+  BUILD +stress --i=impish-20220415
+  COPY +target244/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target246:
+  FROM ubuntu:impish-20220427
+  BUILD +stress --i=impish-20220427
+  COPY +target245/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target247:
+  FROM ubuntu:impish-20220531
+  BUILD +stress --i=impish-20220531
+  COPY +target246/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target248:
+  FROM ubuntu:jammy
+  BUILD +stress --i=jammy
+  COPY +target247/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target249:
+  FROM ubuntu:jammy-20211029
+  BUILD +stress --i=jammy-20211029
+  COPY +target248/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target250:
+  FROM ubuntu:jammy-20211122
+  BUILD +stress --i=jammy-20211122
+  COPY +target249/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target251:
+  FROM ubuntu:jammy-20220101
+  BUILD +stress --i=jammy-20220101
+  COPY +target250/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target252:
+  FROM ubuntu:jammy-20220130
+  BUILD +stress --i=jammy-20220130
+  COPY +target251/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target253:
+  FROM ubuntu:jammy-20220301
+  BUILD +stress --i=jammy-20220301
+  COPY +target252/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target254:
+  FROM ubuntu:jammy-20220315
+  BUILD +stress --i=jammy-20220315
+  COPY +target253/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target255:
+  FROM ubuntu:jammy-20220404
+  BUILD +stress --i=jammy-20220404
+  COPY +target254/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target256:
+  FROM ubuntu:jammy-20220421
+  BUILD +stress --i=jammy-20220421
+  COPY +target255/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target257:
+  FROM ubuntu:jammy-20220428
+  BUILD +stress --i=jammy-20220428
+  COPY +target256/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target258:
+  FROM ubuntu:jammy-20220531
+  BUILD +stress --i=jammy-20220531
+  COPY +target257/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target259:
+  FROM ubuntu:jammy-20220801
+  BUILD +stress --i=jammy-20220801
+  COPY +target258/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target260:
+  FROM ubuntu:jammy-20220815
+  BUILD +stress --i=jammy-20220815
+  COPY +target259/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target261:
+  FROM ubuntu:jammy-20221003
+  BUILD +stress --i=jammy-20221003
+  COPY +target260/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target262:
+  FROM ubuntu:jammy-20221020
+  BUILD +stress --i=jammy-20221020
+  COPY +target261/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target263:
+  FROM ubuntu:jammy-20221101
+  BUILD +stress --i=jammy-20221101
+  COPY +target262/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target264:
+  FROM ubuntu:jammy-20221130
+  BUILD +stress --i=jammy-20221130
+  COPY +target263/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target265:
+  FROM ubuntu:jammy-20230126
+  BUILD +stress --i=jammy-20230126
+  COPY +target264/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target266:
+  FROM ubuntu:kinetic
+  BUILD +stress --i=kinetic
+  COPY +target265/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target267:
+  FROM ubuntu:kinetic-20220428
+  BUILD +stress --i=kinetic-20220428
+  COPY +target266/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target268:
+  FROM ubuntu:kinetic-20220602
+  BUILD +stress --i=kinetic-20220602
+  COPY +target267/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target269:
+  FROM ubuntu:kinetic-20220801
+  BUILD +stress --i=kinetic-20220801
+  COPY +target268/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target270:
+  FROM ubuntu:kinetic-20220830
+  BUILD +stress --i=kinetic-20220830
+  COPY +target269/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target271:
+  FROM ubuntu:kinetic-20220922
+  BUILD +stress --i=kinetic-20220922
+  COPY +target270/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target272:
+  FROM ubuntu:kinetic-20221024
+  BUILD +stress --i=kinetic-20221024
+  COPY +target271/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target273:
+  FROM ubuntu:kinetic-20221101
+  BUILD +stress --i=kinetic-20221101
+  COPY +target272/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target274:
+  FROM ubuntu:kinetic-20221130
+  BUILD +stress --i=kinetic-20221130
+  COPY +target273/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target275:
+  FROM ubuntu:kinetic-20230126
+  BUILD +stress --i=kinetic-20230126
+  COPY +target274/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target276:
+  FROM ubuntu:latest
+  BUILD +stress --i=latest
+  COPY +target275/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target277:
+  FROM ubuntu:lucid
+  BUILD +stress --i=lucid
+  COPY +target276/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target278:
+  FROM ubuntu:lunar
+  BUILD +stress --i=lunar
+  COPY +target277/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target279:
+  FROM ubuntu:lunar-20221207
+  BUILD +stress --i=lunar-20221207
+  COPY +target278/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target280:
+  FROM ubuntu:lunar-20221216
+  BUILD +stress --i=lunar-20221216
+  COPY +target279/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target281:
+  FROM ubuntu:lunar-20230124.1
+  BUILD +stress --i=lunar-20230124.1
+  COPY +target280/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target282:
+  FROM ubuntu:lunar-20230128
+  BUILD +stress --i=lunar-20230128
+  COPY +target281/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target283:
+  FROM ubuntu:precise
+  BUILD +stress --i=precise
+  COPY +target282/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target284:
+  FROM ubuntu:precise-20150212
+  BUILD +stress --i=precise-20150212
+  COPY +target283/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target285:
+  FROM ubuntu:precise-20150228.11
+  BUILD +stress --i=precise-20150228.11
+  COPY +target284/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target286:
+  FROM ubuntu:precise-20150320
+  BUILD +stress --i=precise-20150320
+  COPY +target285/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target287:
+  FROM ubuntu:precise-20150427
+  BUILD +stress --i=precise-20150427
+  COPY +target286/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target288:
+  FROM ubuntu:precise-20150528
+  BUILD +stress --i=precise-20150528
+  COPY +target287/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target289:
+  FROM ubuntu:precise-20150612
+  BUILD +stress --i=precise-20150612
+  COPY +target288/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target290:
+  FROM ubuntu:precise-20150626
+  BUILD +stress --i=precise-20150626
+  COPY +target289/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target291:
+  FROM ubuntu:precise-20150729
+  BUILD +stress --i=precise-20150729
+  COPY +target290/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target292:
+  FROM ubuntu:precise-20150813
+  BUILD +stress --i=precise-20150813
+  COPY +target291/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target293:
+  FROM ubuntu:precise-20150924
+  BUILD +stress --i=precise-20150924
+  COPY +target292/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target294:
+  FROM ubuntu:precise-20151020
+  BUILD +stress --i=precise-20151020
+  COPY +target293/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target295:
+  FROM ubuntu:precise-20151028
+  BUILD +stress --i=precise-20151028
+  COPY +target294/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target296:
+  FROM ubuntu:precise-20151208
+  BUILD +stress --i=precise-20151208
+  COPY +target295/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target297:
+  FROM ubuntu:precise-20160108
+  BUILD +stress --i=precise-20160108
+  COPY +target296/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target298:
+  FROM ubuntu:precise-20160217
+  BUILD +stress --i=precise-20160217
+  COPY +target297/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target299:
+  FROM ubuntu:precise-20160225
+  BUILD +stress --i=precise-20160225
+  COPY +target298/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target300:
+  FROM ubuntu:precise-20160303
+  BUILD +stress --i=precise-20160303
+  COPY +target299/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target301:
+  FROM ubuntu:precise-20160311
+  BUILD +stress --i=precise-20160311
+  COPY +target300/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target302:
+  FROM ubuntu:precise-20160318
+  BUILD +stress --i=precise-20160318
+  COPY +target301/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target303:
+  FROM ubuntu:precise-20160330
+  BUILD +stress --i=precise-20160330
+  COPY +target302/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target304:
+  FROM ubuntu:precise-20160425
+  BUILD +stress --i=precise-20160425
+  COPY +target303/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target305:
+  FROM ubuntu:precise-20160503
+  BUILD +stress --i=precise-20160503
+  COPY +target304/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target306:
+  FROM ubuntu:precise-20160526
+  BUILD +stress --i=precise-20160526
+  COPY +target305/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target307:
+  FROM ubuntu:precise-20160624
+  BUILD +stress --i=precise-20160624
+  COPY +target306/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target308:
+  FROM ubuntu:precise-20160707
+  BUILD +stress --i=precise-20160707
+  COPY +target307/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target309:
+  FROM ubuntu:precise-20160819
+  BUILD +stress --i=precise-20160819
+  COPY +target308/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target310:
+  FROM ubuntu:precise-20160923.1
+  BUILD +stress --i=precise-20160923.1
+  COPY +target309/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target311:
+  FROM ubuntu:precise-20161102
+  BUILD +stress --i=precise-20161102
+  COPY +target310/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target312:
+  FROM ubuntu:precise-20161123
+  BUILD +stress --i=precise-20161123
+  COPY +target311/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target313:
+  FROM ubuntu:precise-20161209
+  BUILD +stress --i=precise-20161209
+  COPY +target312/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target314:
+  FROM ubuntu:precise-20170214
+  BUILD +stress --i=precise-20170214
+  COPY +target313/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target315:
+  FROM ubuntu:precise-20170331
+  BUILD +stress --i=precise-20170331
+  COPY +target314/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target316:
+  FROM ubuntu:quantal
+  BUILD +stress --i=quantal
+  COPY +target315/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target317:
+  FROM ubuntu:raring
+  BUILD +stress --i=raring
+  COPY +target316/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target318:
+  FROM ubuntu:rolling
+  BUILD +stress --i=rolling
+  COPY +target317/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target319:
+  FROM ubuntu:saucy
+  BUILD +stress --i=saucy
+  COPY +target318/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target320:
+  FROM ubuntu:trusty
+  BUILD +stress --i=trusty
+  COPY +target319/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target321:
+  FROM ubuntu:trusty-20150218.1
+  BUILD +stress --i=trusty-20150218.1
+  COPY +target320/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target322:
+  FROM ubuntu:trusty-20150228.11
+  BUILD +stress --i=trusty-20150228.11
+  COPY +target321/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target323:
+  FROM ubuntu:trusty-20150320
+  BUILD +stress --i=trusty-20150320
+  COPY +target322/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target324:
+  FROM ubuntu:trusty-20150427
+  BUILD +stress --i=trusty-20150427
+  COPY +target323/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target325:
+  FROM ubuntu:trusty-20150528
+  BUILD +stress --i=trusty-20150528
+  COPY +target324/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target326:
+  FROM ubuntu:trusty-20150612
+  BUILD +stress --i=trusty-20150612
+  COPY +target325/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target327:
+  FROM ubuntu:trusty-20150630
+  BUILD +stress --i=trusty-20150630
+  COPY +target326/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target328:
+  FROM ubuntu:trusty-20150730
+  BUILD +stress --i=trusty-20150730
+  COPY +target327/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target329:
+  FROM ubuntu:trusty-20150806
+  BUILD +stress --i=trusty-20150806
+  COPY +target328/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target330:
+  FROM ubuntu:trusty-20150814
+  BUILD +stress --i=trusty-20150814
+  COPY +target329/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target331:
+  FROM ubuntu:trusty-20151001
+  BUILD +stress --i=trusty-20151001
+  COPY +target330/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target332:
+  FROM ubuntu:trusty-20151009
+  BUILD +stress --i=trusty-20151009
+  COPY +target331/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target333:
+  FROM ubuntu:trusty-20151021
+  BUILD +stress --i=trusty-20151021
+  COPY +target332/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target334:
+  FROM ubuntu:trusty-20151028
+  BUILD +stress --i=trusty-20151028
+  COPY +target333/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target335:
+  FROM ubuntu:trusty-20151208
+  BUILD +stress --i=trusty-20151208
+  COPY +target334/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target336:
+  FROM ubuntu:trusty-20151218
+  BUILD +stress --i=trusty-20151218
+  COPY +target335/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target337:
+  FROM ubuntu:trusty-20160119
+  BUILD +stress --i=trusty-20160119
+  COPY +target336/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target338:
+  FROM ubuntu:trusty-20160217
+  BUILD +stress --i=trusty-20160217
+  COPY +target337/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target339:
+  FROM ubuntu:trusty-20160226
+  BUILD +stress --i=trusty-20160226
+  COPY +target338/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target340:
+  FROM ubuntu:trusty-20160302
+  BUILD +stress --i=trusty-20160302
+  COPY +target339/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target341:
+  FROM ubuntu:trusty-20160315
+  BUILD +stress --i=trusty-20160315
+  COPY +target340/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target342:
+  FROM ubuntu:trusty-20160317
+  BUILD +stress --i=trusty-20160317
+  COPY +target341/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target343:
+  FROM ubuntu:trusty-20160323
+  BUILD +stress --i=trusty-20160323
+  COPY +target342/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target344:
+  FROM ubuntu:trusty-20160405
+  BUILD +stress --i=trusty-20160405
+  COPY +target343/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target345:
+  FROM ubuntu:trusty-20160412
+  BUILD +stress --i=trusty-20160412
+  COPY +target344/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target346:
+  FROM ubuntu:trusty-20160424
+  BUILD +stress --i=trusty-20160424
+  COPY +target345/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target347:
+  FROM ubuntu:trusty-20160503.1
+  BUILD +stress --i=trusty-20160503.1
+  COPY +target346/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target348:
+  FROM ubuntu:trusty-20160526
+  BUILD +stress --i=trusty-20160526
+  COPY +target347/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target349:
+  FROM ubuntu:trusty-20160624
+  BUILD +stress --i=trusty-20160624
+  COPY +target348/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target350:
+  FROM ubuntu:trusty-20160711
+  BUILD +stress --i=trusty-20160711
+  COPY +target349/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target351:
+  FROM ubuntu:trusty-20160802
+  BUILD +stress --i=trusty-20160802
+  COPY +target350/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target352:
+  FROM ubuntu:trusty-20160819
+  BUILD +stress --i=trusty-20160819
+  COPY +target351/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target353:
+  FROM ubuntu:trusty-20160914
+  BUILD +stress --i=trusty-20160914
+  COPY +target352/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target354:
+  FROM ubuntu:trusty-20160923.1
+  BUILD +stress --i=trusty-20160923.1
+  COPY +target353/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target355:
+  FROM ubuntu:trusty-20161006
+  BUILD +stress --i=trusty-20161006
+  COPY +target354/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target356:
+  FROM ubuntu:trusty-20161101
+  BUILD +stress --i=trusty-20161101
+  COPY +target355/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target357:
+  FROM ubuntu:trusty-20161123
+  BUILD +stress --i=trusty-20161123
+  COPY +target356/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target358:
+  FROM ubuntu:trusty-20161214
+  BUILD +stress --i=trusty-20161214
+  COPY +target357/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target359:
+  FROM ubuntu:trusty-20170119
+  BUILD +stress --i=trusty-20170119
+  COPY +target358/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target360:
+  FROM ubuntu:trusty-20170214
+  BUILD +stress --i=trusty-20170214
+  COPY +target359/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target361:
+  FROM ubuntu:trusty-20170330
+  BUILD +stress --i=trusty-20170330
+  COPY +target360/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target362:
+  FROM ubuntu:trusty-20170602
+  BUILD +stress --i=trusty-20170602
+  COPY +target361/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target363:
+  FROM ubuntu:trusty-20170620
+  BUILD +stress --i=trusty-20170620
+  COPY +target362/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target364:
+  FROM ubuntu:trusty-20170719
+  BUILD +stress --i=trusty-20170719
+  COPY +target363/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target365:
+  FROM ubuntu:trusty-20170728
+  BUILD +stress --i=trusty-20170728
+  COPY +target364/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target366:
+  FROM ubuntu:trusty-20170817
+  BUILD +stress --i=trusty-20170817
+  COPY +target365/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target367:
+  FROM ubuntu:trusty-20171117
+  BUILD +stress --i=trusty-20171117
+  COPY +target366/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target368:
+  FROM ubuntu:trusty-20171207
+  BUILD +stress --i=trusty-20171207
+  COPY +target367/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target369:
+  FROM ubuntu:trusty-20180112
+  BUILD +stress --i=trusty-20180112
+  COPY +target368/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target370:
+  FROM ubuntu:trusty-20180123
+  BUILD +stress --i=trusty-20180123
+  COPY +target369/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target371:
+  FROM ubuntu:trusty-20180302
+  BUILD +stress --i=trusty-20180302
+  COPY +target370/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target372:
+  FROM ubuntu:trusty-20180412
+  BUILD +stress --i=trusty-20180412
+  COPY +target371/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target373:
+  FROM ubuntu:trusty-20180420
+  BUILD +stress --i=trusty-20180420
+  COPY +target372/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target374:
+  FROM ubuntu:trusty-20180531
+  BUILD +stress --i=trusty-20180531
+  COPY +target373/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target375:
+  FROM ubuntu:trusty-20180712
+  BUILD +stress --i=trusty-20180712
+  COPY +target374/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target376:
+  FROM ubuntu:trusty-20180807
+  BUILD +stress --i=trusty-20180807
+  COPY +target375/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target377:
+  FROM ubuntu:trusty-20180929
+  BUILD +stress --i=trusty-20180929
+  COPY +target376/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target378:
+  FROM ubuntu:trusty-20181115
+  BUILD +stress --i=trusty-20181115
+  COPY +target377/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target379:
+  FROM ubuntu:trusty-20181217
+  BUILD +stress --i=trusty-20181217
+  COPY +target378/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target380:
+  FROM ubuntu:trusty-20190122
+  BUILD +stress --i=trusty-20190122
+  COPY +target379/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target381:
+  FROM ubuntu:trusty-20190305
+  BUILD +stress --i=trusty-20190305
+  COPY +target380/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target382:
+  FROM ubuntu:trusty-20190425
+  BUILD +stress --i=trusty-20190425
+  COPY +target381/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target383:
+  FROM ubuntu:trusty-20190515
+  BUILD +stress --i=trusty-20190515
+  COPY +target382/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target384:
+  FROM ubuntu:trusty-20191107
+  BUILD +stress --i=trusty-20191107
+  COPY +target383/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target385:
+  FROM ubuntu:trusty-20191217
+  BUILD +stress --i=trusty-20191217
+  COPY +target384/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target386:
+  FROM ubuntu:utopic
+  BUILD +stress --i=utopic
+  COPY +target385/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target387:
+  FROM ubuntu:utopic-20150211
+  BUILD +stress --i=utopic-20150211
+  COPY +target386/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target388:
+  FROM ubuntu:utopic-20150228.11
+  BUILD +stress --i=utopic-20150228.11
+  COPY +target387/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target389:
+  FROM ubuntu:utopic-20150319
+  BUILD +stress --i=utopic-20150319
+  COPY +target388/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target390:
+  FROM ubuntu:utopic-20150418
+  BUILD +stress --i=utopic-20150418
+  COPY +target389/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target391:
+  FROM ubuntu:utopic-20150427
+  BUILD +stress --i=utopic-20150427
+  COPY +target390/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target392:
+  FROM ubuntu:utopic-20150528
+  BUILD +stress --i=utopic-20150528
+  COPY +target391/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target393:
+  FROM ubuntu:utopic-20150612
+  BUILD +stress --i=utopic-20150612
+  COPY +target392/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target394:
+  FROM ubuntu:utopic-20150625
+  BUILD +stress --i=utopic-20150625
+  COPY +target393/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target395:
+  FROM ubuntu:vivid
+  BUILD +stress --i=vivid
+  COPY +target394/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target396:
+  FROM ubuntu:vivid-20150218
+  BUILD +stress --i=vivid-20150218
+  COPY +target395/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target397:
+  FROM ubuntu:vivid-20150309
+  BUILD +stress --i=vivid-20150309
+  COPY +target396/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target398:
+  FROM ubuntu:vivid-20150319.1
+  BUILD +stress --i=vivid-20150319.1
+  COPY +target397/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target399:
+  FROM ubuntu:vivid-20150421
+  BUILD +stress --i=vivid-20150421
+  COPY +target398/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target400:
+  FROM ubuntu:vivid-20150427
+  BUILD +stress --i=vivid-20150427
+  COPY +target399/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target401:
+  FROM ubuntu:vivid-20150528
+  BUILD +stress --i=vivid-20150528
+  COPY +target400/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target402:
+  FROM ubuntu:vivid-20150611
+  BUILD +stress --i=vivid-20150611
+  COPY +target401/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target403:
+  FROM ubuntu:vivid-20150802
+  BUILD +stress --i=vivid-20150802
+  COPY +target402/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target404:
+  FROM ubuntu:vivid-20150813
+  BUILD +stress --i=vivid-20150813
+  COPY +target403/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target405:
+  FROM ubuntu:vivid-20150930
+  BUILD +stress --i=vivid-20150930
+  COPY +target404/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target406:
+  FROM ubuntu:vivid-20151021
+  BUILD +stress --i=vivid-20151021
+  COPY +target405/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target407:
+  FROM ubuntu:vivid-20151106
+  BUILD +stress --i=vivid-20151106
+  COPY +target406/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target408:
+  FROM ubuntu:vivid-20151111
+  BUILD +stress --i=vivid-20151111
+  COPY +target407/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target409:
+  FROM ubuntu:vivid-20151208
+  BUILD +stress --i=vivid-20151208
+  COPY +target408/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target410:
+  FROM ubuntu:vivid-20160122
+  BUILD +stress --i=vivid-20160122
+  COPY +target409/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target411:
+  FROM ubuntu:wily
+  BUILD +stress --i=wily
+  COPY +target410/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target412:
+  FROM ubuntu:wily-20150528.1
+  BUILD +stress --i=wily-20150528.1
+  COPY +target411/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target413:
+  FROM ubuntu:wily-20150611
+  BUILD +stress --i=wily-20150611
+  COPY +target412/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target414:
+  FROM ubuntu:wily-20150708
+  BUILD +stress --i=wily-20150708
+  COPY +target413/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target415:
+  FROM ubuntu:wily-20150731
+  BUILD +stress --i=wily-20150731
+  COPY +target414/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target416:
+  FROM ubuntu:wily-20150807
+  BUILD +stress --i=wily-20150807
+  COPY +target415/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target417:
+  FROM ubuntu:wily-20150818
+  BUILD +stress --i=wily-20150818
+  COPY +target416/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target418:
+  FROM ubuntu:wily-20150829
+  BUILD +stress --i=wily-20150829
+  COPY +target417/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target419:
+  FROM ubuntu:wily-20151006
+  BUILD +stress --i=wily-20151006
+  COPY +target418/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target420:
+  FROM ubuntu:wily-20151009
+  BUILD +stress --i=wily-20151009
+  COPY +target419/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target421:
+  FROM ubuntu:wily-20151019
+  BUILD +stress --i=wily-20151019
+  COPY +target420/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target422:
+  FROM ubuntu:wily-20151208
+  BUILD +stress --i=wily-20151208
+  COPY +target421/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target423:
+  FROM ubuntu:wily-20160121
+  BUILD +stress --i=wily-20160121
+  COPY +target422/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target424:
+  FROM ubuntu:wily-20160217
+  BUILD +stress --i=wily-20160217
+  COPY +target423/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target425:
+  FROM ubuntu:wily-20160302
+  BUILD +stress --i=wily-20160302
+  COPY +target424/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target426:
+  FROM ubuntu:wily-20160316
+  BUILD +stress --i=wily-20160316
+  COPY +target425/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target427:
+  FROM ubuntu:wily-20160329
+  BUILD +stress --i=wily-20160329
+  COPY +target426/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target428:
+  FROM ubuntu:wily-20160424
+  BUILD +stress --i=wily-20160424
+  COPY +target427/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target429:
+  FROM ubuntu:wily-20160503
+  BUILD +stress --i=wily-20160503
+  COPY +target428/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target430:
+  FROM ubuntu:wily-20160526
+  BUILD +stress --i=wily-20160526
+  COPY +target429/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target431:
+  FROM ubuntu:wily-20160602
+  BUILD +stress --i=wily-20160602
+  COPY +target430/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target432:
+  FROM ubuntu:wily-20160706
+  BUILD +stress --i=wily-20160706
+  COPY +target431/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target433:
+  FROM ubuntu:xenial
+  BUILD +stress --i=xenial
+  COPY +target432/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target434:
+  FROM ubuntu:xenial-20151218.1
+  BUILD +stress --i=xenial-20151218.1
+  COPY +target433/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target435:
+  FROM ubuntu:xenial-20160119.1
+  BUILD +stress --i=xenial-20160119.1
+  COPY +target434/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target436:
+  FROM ubuntu:xenial-20160125
+  BUILD +stress --i=xenial-20160125
+  COPY +target435/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target437:
+  FROM ubuntu:xenial-20160217.2
+  BUILD +stress --i=xenial-20160217.2
+  COPY +target436/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target438:
+  FROM ubuntu:xenial-20160226
+  BUILD +stress --i=xenial-20160226
+  COPY +target437/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target439:
+  FROM ubuntu:xenial-20160303.1
+  BUILD +stress --i=xenial-20160303.1
+  COPY +target438/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target440:
+  FROM ubuntu:xenial-20160314.4
+  BUILD +stress --i=xenial-20160314.4
+  COPY +target439/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target441:
+  FROM ubuntu:xenial-20160317
+  BUILD +stress --i=xenial-20160317
+  COPY +target440/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target442:
+  FROM ubuntu:xenial-20160331.1
+  BUILD +stress --i=xenial-20160331.1
+  COPY +target441/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target443:
+  FROM ubuntu:xenial-20160422
+  BUILD +stress --i=xenial-20160422
+  COPY +target442/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target444:
+  FROM ubuntu:xenial-20160503
+  BUILD +stress --i=xenial-20160503
+  COPY +target443/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target445:
+  FROM ubuntu:xenial-20160525
+  BUILD +stress --i=xenial-20160525
+  COPY +target444/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target446:
+  FROM ubuntu:xenial-20160629
+  BUILD +stress --i=xenial-20160629
+  COPY +target445/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target447:
+  FROM ubuntu:xenial-20160706
+  BUILD +stress --i=xenial-20160706
+  COPY +target446/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target448:
+  FROM ubuntu:xenial-20160713
+  BUILD +stress --i=xenial-20160713
+  COPY +target447/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target449:
+  FROM ubuntu:xenial-20160809
+  BUILD +stress --i=xenial-20160809
+  COPY +target448/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target450:
+  FROM ubuntu:xenial-20160818
+  BUILD +stress --i=xenial-20160818
+  COPY +target449/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target451:
+  FROM ubuntu:xenial-20160914
+  BUILD +stress --i=xenial-20160914
+  COPY +target450/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target452:
+  FROM ubuntu:xenial-20160923.1
+  BUILD +stress --i=xenial-20160923.1
+  COPY +target451/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target453:
+  FROM ubuntu:xenial-20161010
+  BUILD +stress --i=xenial-20161010
+  COPY +target452/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target454:
+  FROM ubuntu:xenial-20161114
+  BUILD +stress --i=xenial-20161114
+  COPY +target453/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target455:
+  FROM ubuntu:xenial-20161121
+  BUILD +stress --i=xenial-20161121
+  COPY +target454/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target456:
+  FROM ubuntu:xenial-20161213
+  BUILD +stress --i=xenial-20161213
+  COPY +target455/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target457:
+  FROM ubuntu:xenial-20170119
+  BUILD +stress --i=xenial-20170119
+  COPY +target456/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target458:
+  FROM ubuntu:xenial-20170214
+  BUILD +stress --i=xenial-20170214
+  COPY +target457/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target459:
+  FROM ubuntu:xenial-20170410
+  BUILD +stress --i=xenial-20170410
+  COPY +target458/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target460:
+  FROM ubuntu:xenial-20170417.1
+  BUILD +stress --i=xenial-20170417.1
+  COPY +target459/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target461:
+  FROM ubuntu:xenial-20170510
+  BUILD +stress --i=xenial-20170510
+  COPY +target460/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target462:
+  FROM ubuntu:xenial-20170517.1
+  BUILD +stress --i=xenial-20170517.1
+  COPY +target461/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target463:
+  FROM ubuntu:xenial-20170619
+  BUILD +stress --i=xenial-20170619
+  COPY +target462/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target464:
+  FROM ubuntu:xenial-20170710
+  BUILD +stress --i=xenial-20170710
+  COPY +target463/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target465:
+  FROM ubuntu:xenial-20170802
+  BUILD +stress --i=xenial-20170802
+  COPY +target464/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target466:
+  FROM ubuntu:xenial-20170915
+  BUILD +stress --i=xenial-20170915
+  COPY +target465/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target467:
+  FROM ubuntu:xenial-20171006
+  BUILD +stress --i=xenial-20171006
+  COPY +target466/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target468:
+  FROM ubuntu:xenial-20171114
+  BUILD +stress --i=xenial-20171114
+  COPY +target467/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target469:
+  FROM ubuntu:xenial-20171201
+  BUILD +stress --i=xenial-20171201
+  COPY +target468/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target470:
+  FROM ubuntu:xenial-20180112.1
+  BUILD +stress --i=xenial-20180112.1
+  COPY +target469/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target471:
+  FROM ubuntu:xenial-20180123
+  BUILD +stress --i=xenial-20180123
+  COPY +target470/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target472:
+  FROM ubuntu:xenial-20180228
+  BUILD +stress --i=xenial-20180228
+  COPY +target471/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target473:
+  FROM ubuntu:xenial-20180412
+  BUILD +stress --i=xenial-20180412
+  COPY +target472/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target474:
+  FROM ubuntu:xenial-20180417
+  BUILD +stress --i=xenial-20180417
+  COPY +target473/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target475:
+  FROM ubuntu:xenial-20180525
+  BUILD +stress --i=xenial-20180525
+  COPY +target474/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target476:
+  FROM ubuntu:xenial-20180705
+  BUILD +stress --i=xenial-20180705
+  COPY +target475/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target477:
+  FROM ubuntu:xenial-20180726
+  BUILD +stress --i=xenial-20180726
+  COPY +target476/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target478:
+  FROM ubuntu:xenial-20180808
+  BUILD +stress --i=xenial-20180808
+  COPY +target477/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target479:
+  FROM ubuntu:xenial-20181005
+  BUILD +stress --i=xenial-20181005
+  COPY +target478/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target480:
+  FROM ubuntu:xenial-20181113
+  BUILD +stress --i=xenial-20181113
+  COPY +target479/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target481:
+  FROM ubuntu:xenial-20181218
+  BUILD +stress --i=xenial-20181218
+  COPY +target480/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target482:
+  FROM ubuntu:xenial-20190122
+  BUILD +stress --i=xenial-20190122
+  COPY +target481/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target483:
+  FROM ubuntu:xenial-20190222
+  BUILD +stress --i=xenial-20190222
+  COPY +target482/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target484:
+  FROM ubuntu:xenial-20190425
+  BUILD +stress --i=xenial-20190425
+  COPY +target483/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target485:
+  FROM ubuntu:xenial-20190515
+  BUILD +stress --i=xenial-20190515
+  COPY +target484/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target486:
+  FROM ubuntu:xenial-20190610
+  BUILD +stress --i=xenial-20190610
+  COPY +target485/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target487:
+  FROM ubuntu:xenial-20190720
+  BUILD +stress --i=xenial-20190720
+  COPY +target486/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target488:
+  FROM ubuntu:xenial-20190904
+  BUILD +stress --i=xenial-20190904
+  COPY +target487/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target489:
+  FROM ubuntu:xenial-20191010
+  BUILD +stress --i=xenial-20191010
+  COPY +target488/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target490:
+  FROM ubuntu:xenial-20191024
+  BUILD +stress --i=xenial-20191024
+  COPY +target489/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target491:
+  FROM ubuntu:xenial-20191108
+  BUILD +stress --i=xenial-20191108
+  COPY +target490/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target492:
+  FROM ubuntu:xenial-20191212
+  BUILD +stress --i=xenial-20191212
+  COPY +target491/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target493:
+  FROM ubuntu:xenial-20200114
+  BUILD +stress --i=xenial-20200114
+  COPY +target492/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target494:
+  FROM ubuntu:xenial-20200212
+  BUILD +stress --i=xenial-20200212
+  COPY +target493/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target495:
+  FROM ubuntu:xenial-20200326
+  BUILD +stress --i=xenial-20200326
+  COPY +target494/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target496:
+  FROM ubuntu:xenial-20200514
+  BUILD +stress --i=xenial-20200514
+  COPY +target495/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target497:
+  FROM ubuntu:xenial-20200619
+  BUILD +stress --i=xenial-20200619
+  COPY +target496/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target498:
+  FROM ubuntu:xenial-20200706
+  BUILD +stress --i=xenial-20200706
+  COPY +target497/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target499:
+  FROM ubuntu:xenial-20200807
+  BUILD +stress --i=xenial-20200807
+  COPY +target498/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target500:
+  FROM ubuntu:xenial-20200903
+  BUILD +stress --i=xenial-20200903
+  COPY +target499/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target501:
+  FROM ubuntu:xenial-20200916
+  BUILD +stress --i=xenial-20200916
+  COPY +target500/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target502:
+  FROM ubuntu:xenial-20201014
+  BUILD +stress --i=xenial-20201014
+  COPY +target501/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target503:
+  FROM ubuntu:xenial-20201030
+  BUILD +stress --i=xenial-20201030
+  COPY +target502/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target504:
+  FROM ubuntu:xenial-20210114
+  BUILD +stress --i=xenial-20210114
+  COPY +target503/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target505:
+  FROM ubuntu:xenial-20210416
+  BUILD +stress --i=xenial-20210416
+  COPY +target504/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target506:
+  FROM ubuntu:xenial-20210429
+  BUILD +stress --i=xenial-20210429
+  COPY +target505/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target507:
+  FROM ubuntu:xenial-20210611
+  BUILD +stress --i=xenial-20210611
+  COPY +target506/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target508:
+  FROM ubuntu:xenial-20210722
+  BUILD +stress --i=xenial-20210722
+  COPY +target507/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target509:
+  FROM ubuntu:xenial-20210804
+  BUILD +stress --i=xenial-20210804
+  COPY +target508/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target510:
+  FROM ubuntu:yakkety
+  BUILD +stress --i=yakkety
+  COPY +target509/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target511:
+  FROM ubuntu:yakkety-20160708
+  BUILD +stress --i=yakkety-20160708
+  COPY +target510/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target512:
+  FROM ubuntu:yakkety-20160717
+  BUILD +stress --i=yakkety-20160717
+  COPY +target511/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target513:
+  FROM ubuntu:yakkety-20160806.1
+  BUILD +stress --i=yakkety-20160806.1
+  COPY +target512/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target514:
+  FROM ubuntu:yakkety-20160826
+  BUILD +stress --i=yakkety-20160826
+  COPY +target513/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target515:
+  FROM ubuntu:yakkety-20160919
+  BUILD +stress --i=yakkety-20160919
+  COPY +target514/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target516:
+  FROM ubuntu:yakkety-20160923.1
+  BUILD +stress --i=yakkety-20160923.1
+  COPY +target515/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target517:
+  FROM ubuntu:yakkety-20161013
+  BUILD +stress --i=yakkety-20161013
+  COPY +target516/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target518:
+  FROM ubuntu:yakkety-20161104
+  BUILD +stress --i=yakkety-20161104
+  COPY +target517/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target519:
+  FROM ubuntu:yakkety-20161121
+  BUILD +stress --i=yakkety-20161121
+  COPY +target518/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target520:
+  FROM ubuntu:yakkety-20161213
+  BUILD +stress --i=yakkety-20161213
+  COPY +target519/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target521:
+  FROM ubuntu:yakkety-20170104
+  BUILD +stress --i=yakkety-20170104
+  COPY +target520/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target522:
+  FROM ubuntu:yakkety-20170224
+  BUILD +stress --i=yakkety-20170224
+  COPY +target521/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target523:
+  FROM ubuntu:yakkety-20170327
+  BUILD +stress --i=yakkety-20170327
+  COPY +target522/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target524:
+  FROM ubuntu:yakkety-20170517.1
+  BUILD +stress --i=yakkety-20170517.1
+  COPY +target523/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target525:
+  FROM ubuntu:yakkety-20170619
+  BUILD +stress --i=yakkety-20170619
+  COPY +target524/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target526:
+  FROM ubuntu:yakkety-20170704
+  BUILD +stress --i=yakkety-20170704
+  COPY +target525/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target527:
+  FROM ubuntu:zesty
+  BUILD +stress --i=zesty
+  COPY +target526/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target528:
+  FROM ubuntu:zesty-20161129.1
+  BUILD +stress --i=zesty-20161129.1
+  COPY +target527/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target529:
+  FROM ubuntu:zesty-20161212
+  BUILD +stress --i=zesty-20161212
+  COPY +target528/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target530:
+  FROM ubuntu:zesty-20170118
+  BUILD +stress --i=zesty-20170118
+  COPY +target529/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target531:
+  FROM ubuntu:zesty-20170224
+  BUILD +stress --i=zesty-20170224
+  COPY +target530/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target532:
+  FROM ubuntu:zesty-20170411
+  BUILD +stress --i=zesty-20170411
+  COPY +target531/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target533:
+  FROM ubuntu:zesty-20170517.1
+  BUILD +stress --i=zesty-20170517.1
+  COPY +target532/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target534:
+  FROM ubuntu:zesty-20170619
+  BUILD +stress --i=zesty-20170619
+  COPY +target533/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target535:
+  FROM ubuntu:zesty-20170703
+  BUILD +stress --i=zesty-20170703
+  COPY +target534/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target536:
+  FROM ubuntu:zesty-20170913
+  BUILD +stress --i=zesty-20170913
+  COPY +target535/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target537:
+  FROM ubuntu:zesty-20170915
+  BUILD +stress --i=zesty-20170915
+  COPY +target536/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target538:
+  FROM ubuntu:zesty-20171114
+  BUILD +stress --i=zesty-20171114
+  COPY +target537/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+target539:
+  FROM ubuntu:zesty-20171122
+  BUILD +stress --i=zesty-20171122
+  COPY +target538/data .
+  RUN cat /etc/lsb-release >> /data
+  SAVE ARTIFACT /data
+after:
+  FROM alpine:latest
+  COPY +target539/data .
+  RUN cat /data
+  RUN wc -l /data
